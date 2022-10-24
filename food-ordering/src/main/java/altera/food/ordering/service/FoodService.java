@@ -51,14 +51,14 @@ public class FoodService {
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
             }
 
-            Optional<restaurant> restaurant = restaurantRepository.findById(request.getrestaurant().getId());
+            Optional<restaurant> restaurant = restaurantRepository.findById(request.getRestaurant().getId());
             if (restaurant.isEmpty()) {
-                log.info("restaurant [{}] not found", request.getrestaurant().getId());
+                log.info("restaurant [{}] not found", request.getRestaurant().getId());
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
             }
 
             food food = mapper.map(request, food.class);
-            food.setrestaurant(restaurant.get());
+            food.setRestaurant(restaurant.get());
             food.setCategory(category.get());
             foodRepository.save(food);
             
